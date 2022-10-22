@@ -28,8 +28,6 @@ const ListBestBook = () => {
                 const responseFiction = await getBestFictionBooks();
                 const responseNonFiction = await getBestNonFictionBooks();
 
-                // console.log(responseFiction);
-                // console.log(responseNonFiction);
                 setBestBooks({
                     fiction: responseFiction,
                     nonFiction: responseNonFiction,
@@ -38,45 +36,26 @@ const ListBestBook = () => {
                 console.log(err);
             }
         };
-
-        // const fetchDataNonFiction = async () => {
-        //     try {
-        //         const responseNonFiction = await nyt.get(
-        //             `lists/current/hardcover-nonfiction.json`
-        //         );
-        //         return responseNonFiction.data.results.books;
-        //     } catch (err) {
-        //         console.log(err);
-        //     }
-        // };
-
-        // const booksFiction = fetchDataFiction();
-        // const bookNonFiction = fetchDataNonFiction();
-
-        // setBestBooks({
-        //     fiction: booksFiction,
-        //     nonFiction: bookNonFiction,
-        // });
         fetchDataFiction();
-        // console.log(bestBooks);
     }, []);
 
     return (
         <>
-            <h1 className='text-lg font-bold'>BEST SELLER</h1>
+            <h1 className="text-lg font-bold">BEST SELLER</h1>
             <h2>Fiction</h2>
-            {bestBooks.fiction !== undefined
-                ? bestBooks.fiction.books.map((book) => {
-                      return (
-                          <CardBestSeller
-                              key={`${book.primary_isbn10}`}
-                              bestBooks={book}
-                          />
-                      );
-                  })
-                : null}
-
-            <h2 className='mt-6'>Non-Fiction</h2>
+            <div className="flex flex-wrap gap-6">
+                {bestBooks.fiction !== undefined
+                    ? bestBooks.fiction.books.map((book) => {
+                          return (
+                              <CardBestSeller
+                                  key={`${book.primary_isbn10}`}
+                                  bestBooks={book}
+                              />
+                          );
+                      })
+                    : null}
+            </div>
+            <h2 className="mt-6">Non-Fiction</h2>
             {bestBooks.nonFiction !== undefined
                 ? bestBooks.nonFiction.books.map((book) => {
                       return (
