@@ -1,5 +1,6 @@
 import nyt from '../apis/nyt';
 import React, { useEffect, useState } from 'react';
+import { Link, Outlet, useSearchParams } from 'react-router-dom';
 import CardBestSeller from '../components/CardBestSeller';
 
 const ListBestBook = () => {
@@ -47,10 +48,14 @@ const ListBestBook = () => {
                 {bestBooks.fiction !== undefined
                     ? bestBooks.fiction.books.map((book) => {
                           return (
-                              <CardBestSeller
+                              <Link
+                                  to={`/${book.primary_isbn10}`}
                                   key={`${book.primary_isbn10}`}
-                                  bestBooks={book}
-                              />
+                              >
+                                  <CardBestSeller
+                                      bestBooks={book}
+                                  />
+                              </Link>
                           );
                       })
                     : null}
@@ -66,6 +71,11 @@ const ListBestBook = () => {
                       );
                   })
                 : null}
+
+            <div>
+                {/* Jangan lupa gunakan outlet di sini (anggap seperti slot yang bisa dimasukkan apa saja) */}
+                <Outlet />
+            </div>
         </>
     );
 };
