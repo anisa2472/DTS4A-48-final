@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -8,26 +9,30 @@ import {
 } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyB9z-LDfCoRJBRTCykPd-01z3BNqXATt90',
-    authDomain: 'profound-hearth-366016.firebaseapp.com',
-    projectId: 'profound-heart-336016',
-    storageBucket: 'profound-hearth-366016.appspot.com',
-    appId: '1:147604325032:web:0c19a4e6674fc3ac62f89d',
-    measurementId: 'G-R4N0BVYVZZ',
-};
+    apiKey: "AIzaSyB9z-LDfCoRJBRTCykPd-01z3BNqXATt90",
+    authDomain: "profound-hearth-366016.firebaseapp.com",
+    databaseURL: "https://profound-hearth-366016-default-rtdb.firebaseio.com",
+    projectId: "profound-hearth-366016",
+    storageBucket: "profound-hearth-366016.appspot.com",
+    messagingSenderId: "147604325032",
+    appId: "1:147604325032:web:0c19a4e6674fc3ac62f89d",
+    measurementId: "G-R4N0BVYVZZ"
+  };
 
 //Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 const register = async (email, password) => {
     try {
-        const response = await createUserWithEmailAndPassword(
+        await createUserWithEmailAndPassword(
             auth,
             email,
             password
         );
-        return alert(response.user, ' Berhasil Register');
+        return alert(`Selamat Datang! Happy Reading~`);
+
     } catch (error) {
         console.log(error.message);
     }

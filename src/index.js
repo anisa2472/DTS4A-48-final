@@ -6,6 +6,7 @@ import ProtectedComponent from './components/ProtectedComponent';
 import App from './App';
 import DetailBook from './containers/BookDetail';
 import LoginPage from './containers/Login';
+import RegisterPage from './containers/Register';
 import Bookshelf from './containers/Bookshelf';
 
 const root = createRoot(document.getElementById('root'));
@@ -24,7 +25,7 @@ root.render(
                 />
                 <Route path="/:isbn10" element={<DetailBook />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" />
+                <Route path="/register" element={<RegisterPage />} />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

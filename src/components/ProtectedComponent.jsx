@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../authentication/firebase';
 
 const ProtectedComponent = ({ children }) => {
+    const [user, isLoading] = useAuthState(auth);
     const navigate = useNavigate();
-    const [user] = useAuthState(auth);
-
     useEffect(() => {
-        if (!user) {
+        if (!isLoading && !user) {
             navigate('/login');
             return;
         }
-    }, [user]);
+    }, [user, isLoading, navigate]);
 
     return children;
 };

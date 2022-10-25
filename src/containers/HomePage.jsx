@@ -1,6 +1,7 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
-import ListBestBook from '../components/ListBestSeller';
+// import ListBestBook from '../components/ListBestSeller';
 import { logout } from '../authentication/firebase';
 
 const Home = () => {
@@ -10,9 +11,10 @@ const Home = () => {
 
     return (
         <>
+            <Navbar />
             <button onClick={logoutHandler}>Log Out</button>
             <SearchBar />
-            <ListBestBook />
+            {/* <ListBestBook /> */}
         </>
     );
 };
