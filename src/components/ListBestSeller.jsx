@@ -1,7 +1,7 @@
-import nyt from '../apis/nyt';
+import nytInstance from '../apis/nyt';
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useSearchParams } from 'react-router-dom';
-import CardBestSeller from '../components/CardBestSeller';
+import { Link, Outlet } from 'react-router-dom';
+import CardBestSeller from './CardBestSeller';
 
 const ListBestBook = () => {
     const [bestBooks, setBestBooks] = useState([
@@ -12,19 +12,19 @@ const ListBestBook = () => {
     ]);
 
     const getBestFictionBooks = async () => {
-        const response = await nyt.get(`lists/current/hardcover-fiction.json`);
+        const response = await nytInstance.get(`lists/current/hardcover-fiction.json`);
         return response.data.results;
     };
 
     const getBestNonFictionBooks = async () => {
-        const response = await nyt.get(
+        const response = await nytInstance.get(
             `lists/current/hardcover-nonfiction.json`
         );
         return response.data.results;
     };
 
     useEffect(() => {
-        const fetchDataFiction = async () => {
+        const fetchData = async () => {
             try {
                 const responseFiction = await getBestFictionBooks();
                 const responseNonFiction = await getBestNonFictionBooks();
@@ -37,7 +37,7 @@ const ListBestBook = () => {
                 console.log(err);
             }
         };
-        fetchDataFiction();
+        fetchData();
     }, []);
 
     return (
@@ -52,6 +52,22 @@ const ListBestBook = () => {
                                   to={`/${book.primary_isbn10}`}
                                   key={`${book.primary_isbn10}`}
                               >
+                                  <CardBestSeller bestBooks={book} />
+                              </Link>
+                          );
+                      })
+                    : null}
+            </div>
+            <h2 className="mt-6
+            ">Non-Fiction</h2>
+            <div className="flex flex-wrap gap-6">
+                {bestBooks.nonFiction !== undefined
+                    ? bestBooks.nonFiction.books.map((book) => {
+                          return (
+                              <Link
+                                  to={`/${book.primary_isbn10}`}
+                                  key={`${book.primary_isbn10}`}
+                              >
                                   <CardBestSeller
                                       bestBooks={book}
                                   />
@@ -60,18 +76,6 @@ const ListBestBook = () => {
                       })
                     : null}
             </div>
-            <h2 className="mt-6">Non-Fiction</h2>
-            {bestBooks.nonFiction !== undefined
-                ? bestBooks.nonFiction.books.map((book) => {
-                      return (
-                          <CardBestSeller
-                              key={`${book.primary_isbn10}`}
-                              bestBooks={book}
-                          />
-                      );
-                  })
-                : null}
-
             <div>
                 {/* Jangan lupa gunakan outlet di sini (anggap seperti slot yang bisa dimasukkan apa saja) */}
                 <Outlet />
