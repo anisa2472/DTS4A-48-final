@@ -1,21 +1,21 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
-// import ListBestBook from '../components/ListBestSeller';
-import { logout } from '../authentication/firebase';
+import ListSearchBook from '../components/ListSearchBooks';
+import ListBestBook from '../components/ListBestSeller';
+import Footer from '../components/Footer';
 
 const Home = () => {
-    const logoutHandler = async () => {
-        await logout();
-    };
-
     return (
-        <>
-            <Navbar />
-            <button onClick={logoutHandler}>Log Out</button>
-            <SearchBar />
-            {/* <ListBestBook /> */}
-        </>
+        <div className='min-h-screen'>
+            <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <SearchBar />
+                <ListSearchBook />
+                <ListBestBook />
+                <Footer />
+            </div>
+        </div>
     );
 };
 

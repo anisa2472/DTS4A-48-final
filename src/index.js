@@ -14,7 +14,14 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<App />} />
+            <Route
+                    path="/"
+                    element={
+                        <ProtectedComponent>
+                            <App />
+                        </ProtectedComponent>
+                    }
+                />
                 <Route
                     path="/bookshelf"
                     element={

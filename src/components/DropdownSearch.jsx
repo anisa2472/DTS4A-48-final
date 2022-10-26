@@ -5,7 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 library.add(faAngleDown);
 
-const Dropdown = ({ placeholder, options, setSearchCategory }) => {
+const DropdownSearch = ({ placeholder, options, setSearchCategory }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [selectedValue, setSelectedValue] = useState(null);
 
@@ -80,4 +80,4 @@ const Dropdown = ({ placeholder, options, setSearchCategory }) => {
     );
 };
 
-export default Dropdown;
+export default DropdownSearch;
